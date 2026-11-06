@@ -1,0 +1,209 @@
+{
+  "_doc": "Plateau en unités de 1200×675 (le décor 1672×941 est mis à l'échelle ×0.7177). Les sièges sont le point au sol sous le personnage assis (centré sur le bureau du décor). corridors : lignes de passage ; verticals : x des couloirs qui descendent entre les salles. Sièges v0.5 : pieds du sprite assis sur la chaise du décor (le bureau du sprite recouvre celui du décor).",
+  "stage": {
+    "w": 1200,
+    "h": 675
+  },
+  "decor": "decor-nuit.jpg",
+  "entrance": [
+    40,
+    605
+  ],
+  "corridors": {
+    "top": 255,
+    "bottom": 645,
+    "verticals": [
+      385,
+      816
+    ]
+  },
+  "bottomFrom": 467,
+  "overflowX": 520,
+  "rooms": {
+    "dev": {
+      "x": 0,
+      "y": 61,
+      "w": 470,
+      "h": 190,
+      "label": "Open space dev",
+      "bg": "#dbeafe",
+      "accent": "#3b82f6",
+      "slots": [
+        [
+          150,
+          232
+        ],
+        [
+          285,
+          236
+        ],
+        [
+          398,
+          226
+        ]
+      ]
+    },
+    "manager": {
+      "x": 474,
+      "y": 57,
+      "w": 337,
+      "h": 183,
+      "label": "Bureau du manager",
+      "bg": "#efe3ff",
+      "accent": "#a855f7",
+      "desk": [
+        655,
+        212
+      ],
+      "visitors": [
+        [
+          600,
+          268
+        ],
+        [
+          700,
+          268
+        ],
+        [
+          550,
+          268
+        ],
+        [
+          750,
+          268
+        ],
+        [
+          650,
+          268
+        ],
+        [
+          500,
+          268
+        ],
+        [
+          800,
+          268
+        ]
+      ]
+    },
+    "securite": {
+      "x": 818,
+      "y": 68,
+      "w": 382,
+      "h": 183,
+      "label": "Labo sécurité",
+      "bg": "#fee2e2",
+      "accent": "#ef4444",
+      "slots": [
+        [
+          955,
+          232
+        ],
+        [
+          1085,
+          232
+        ]
+      ]
+    },
+    "readme": {
+      "x": 0,
+      "y": 258,
+      "w": 377,
+      "h": 205,
+      "label": "Rédaction & docs",
+      "bg": "#fef9c3",
+      "accent": "#f59e0b",
+      "slots": [
+        [
+          240,
+          446
+        ]
+      ]
+    },
+    "meeting": {
+      "x": 391,
+      "y": 258,
+      "w": 420,
+      "h": 205,
+      "label": "Salle de réunion",
+      "bg": "#fce7f3",
+      "accent": "#ec4899",
+      "table": [
+        596,
+        388
+      ],
+      "head": [
+        596,
+        338
+      ],
+      "seats": [
+        [
+          488,
+          392
+        ],
+        [
+          704,
+          392
+        ],
+        [
+          546,
+          440
+        ],
+        [
+          646,
+          440
+        ],
+        [
+          516,
+          346
+        ],
+        [
+          676,
+          346
+        ]
+      ]
+    },
+    "bugs": {
+      "x": 818,
+      "y": 258,
+      "w": 382,
+      "h": 205,
+      "label": "Salle de test",
+      "bg": "#dcfce7",
+      "accent": "#22c55e",
+      "slots": [
+        [
+          950,
+          438
+        ],
+        [
+          1080,
+          436
+        ]
+      ]
+    },
+    "autre": {
+      "x": 0,
+      "y": 467,
+      "w": 459,
+      "h": 208,
+      "label": "Accueil",
+      "bg": "#e5e7eb",
+      "accent": "#6b7280",
+      "slots": [
+        [
+          240,
+          562
+        ],
+        [
+          430,
+          585
+        ],
+        [
+          330,
+          640
+        ]
+      ]
+    }
+  }
+}

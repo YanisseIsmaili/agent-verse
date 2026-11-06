@@ -1,0 +1,57 @@
+/* Agent-Verse : journal lisible d'un agent. */
+:root {
+  --magenta: #ff2d75; --cyan: #00e5ff; --yellow: #ffe600; --paper: #fffdf5;
+  --font-comic: Impact, 'Arial Black', sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; color: #111;
+  background:
+    radial-gradient(circle, rgba(0, 0, 0, .12) 1px, transparent 1.2px) 0 0 / 8px 8px,
+    linear-gradient(160deg, #fff5fa, #eefaff);
+}
+#app { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
+
+.head {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 14px; background: #000; color: #fff; border-bottom: 4px solid var(--magenta);
+}
+.head .role-badge { font-family: var(--font-comic); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; color: #000; }
+.head h1 { font-size: 15px; margin: 0; flex: 1; min-width: 200px; }
+.head .state { font-family: var(--font-comic); font-size: 12px; letter-spacing: 1px; padding: 2px 10px; border-radius: 999px; background: var(--cyan); color: #000; }
+.head .state.waiting { background: var(--magenta); color: #fff; }
+.head .state.done { background: #9be15d; }
+.head .state.idle, .head .state.stale { background: #cfcfcf; }
+.head .live { font-size: 11px; color: #cfc8ee; }
+.head .live.on::before { content: '●'; color: #4ade80; margin-right: 4px; animation: blink 1s infinite; }
+.head button { font-family: var(--font-comic); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border: 2px solid #fff; background: none; color: #fff; border-radius: 6px; cursor: pointer; }
+.head button:hover { background: #fff; color: #000; }
+.now { width: 100%; font-size: 12px; color: #ffe600; }
+@keyframes blink { 50% { opacity: .2; } }
+
+.timeline { overflow: auto; padding: 14px 16px 60px; }
+.entry { display: grid; grid-template-columns: 62px 26px 1fr; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0, 0, 0, .08); align-items: start; }
+.entry .time { font-family: Consolas, monospace; font-size: 11px; color: #666; padding-top: 2px; }
+.entry .ico { font-size: 15px; text-align: center; }
+.entry .body { min-width: 0; }
+.entry.prompt .body { background: var(--yellow); border: 3px solid #000; border-radius: 10px; padding: 8px 10px; box-shadow: 3px 3px 0 #000; white-space: pre-wrap; }
+.entry.prompt .body .lbl { font-family: var(--font-comic); letter-spacing: 1px; font-size: 12px; display: block; margin-bottom: 4px; }
+.entry.text .body { background: #fff; border: 2px solid #000; border-radius: 12px; padding: 8px 10px; white-space: pre-wrap; line-height: 1.35; }
+.entry.handback .body { background: #e6ffd9; border: 3px solid #000; border-radius: 10px; padding: 8px 10px; white-space: pre-wrap; box-shadow: 3px 3px 0 #357a1a; }
+.entry.handback .lbl { font-family: var(--font-comic); letter-spacing: 1px; font-size: 12px; display: block; margin-bottom: 4px; color: #357a1a; }
+.entry.tool .lbl { font-weight: 600; }
+.entry.tool .st { margin-left: 6px; font-size: 11px; }
+.entry.tool .st.ok { color: #0a7; }
+.entry.tool .st.err { color: #d00; font-weight: 700; }
+.entry.tool .st.run { color: #d97706; }
+.entry.tool .det { font-family: Consolas, monospace; font-size: 11px; color: #333; white-space: pre-wrap; word-break: break-all; margin-top: 2px; }
+.entry.tool details { margin-top: 3px; }
+.entry.tool summary { cursor: pointer; font-size: 11px; color: #555; }
+.entry.tool .res { font-family: Consolas, monospace; font-size: 11px; white-space: pre-wrap; background: #f3f3f3; border-left: 3px solid #aaa; padding: 4px 8px; margin-top: 3px; word-break: break-all; }
+.entry.tool .res.err { border-color: #d00; background: #fff0f0; }
+.entry a[data-path] { color: #0b4fd6; cursor: pointer; }
+.entry a[data-path]:hover { text-decoration: underline; }
+.empty { text-align: center; color: #666; margin-top: 40px; }
+.tofollow { position: fixed; right: 16px; bottom: 16px; font-family: var(--font-comic); letter-spacing: 1px; background: var(--magenta); color: #fff; border: 3px solid #000; border-radius: 999px; padding: 6px 14px; cursor: pointer; box-shadow: 3px 3px 0 #000; display: none; }
+.tofollow.show { display: block; }

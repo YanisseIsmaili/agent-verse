@@ -1,0 +1,9 @@
+node_modules/
+out/
+*.vsix
+scripts/preview-state.json
+references/
+media/sources/
+equipe-dev/
+equipe-dev-workspace/
+attack.out.txt

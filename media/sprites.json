@@ -1,0 +1,138 @@
+{
+ "sprites": {
+  "autre-assis": {
+   "w": 148,
+   "h": 132,
+   "headX": 0.622
+  },
+  "autre-debout": {
+   "w": 92,
+   "h": 150,
+   "headX": 0.484
+  },
+  "autre-marche": {
+   "w": 118,
+   "h": 142,
+   "headX": 0.551
+  },
+  "bugs-assis": {
+   "w": 154,
+   "h": 148,
+   "headX": 0.568
+  },
+  "bugs-debout": {
+   "w": 78,
+   "h": 165,
+   "headX": 0.423
+  },
+  "bugs-marche": {
+   "w": 124,
+   "h": 160,
+   "headX": 0.56
+  },
+  "dev-assis": {
+   "w": 158,
+   "h": 146,
+   "headX": 0.538
+  },
+  "dev-debout": {
+   "w": 76,
+   "h": 163,
+   "headX": 0.513
+  },
+  "dev-marche": {
+   "w": 113,
+   "h": 156,
+   "headX": 0.553
+  },
+  "manager-assis": {
+   "w": 275,
+   "h": 494,
+   "headX": 0.475
+  },
+  "manager-debout": {
+   "w": 251,
+   "h": 688,
+   "headX": 0.592
+  },
+  "manager-marche": {
+   "w": 286,
+   "h": 623,
+   "headX": 0.645
+  },
+  "readme-assis": {
+   "w": 144,
+   "h": 145,
+   "headX": 0.66
+  },
+  "readme-debout": {
+   "w": 76,
+   "h": 151,
+   "headX": 0.533
+  },
+  "readme-marche": {
+   "w": 108,
+   "h": 149,
+   "headX": 0.546
+  },
+  "securite-assis": {
+   "w": 151,
+   "h": 157,
+   "headX": 0.586
+  },
+  "securite-debout": {
+   "w": 83,
+   "h": 165,
+   "headX": 0.59
+  },
+  "securite-marche": {
+   "w": 124,
+   "h": 163,
+   "headX": 0.532
+  }
+ },
+ "anims": {
+  "autre-marche": {
+   "frames": 12,
+   "cell": 256,
+   "top": 0.039,
+   "feet": 0.957,
+   "headX": 0.546
+  },
+  "bugs-marche": {
+   "frames": 12,
+   "cell": 256,
+   "top": 0.039,
+   "feet": 0.957,
+   "headX": 0.533
+  },
+  "dev-marche": {
+   "frames": 12,
+   "cell": 256,
+   "top": 0.039,
+   "feet": 0.957,
+   "headX": 0.541
+  },
+  "manager-marche": {
+   "frames": 12,
+   "cell": 256,
+   "top": 0.039,
+   "feet": 0.957,
+   "headX": 0.544
+  },
+  "readme-marche": {
+   "frames": 12,
+   "cell": 256,
+   "top": 0.039,
+   "feet": 0.957,
+   "headX": 0.545
+  },
+  "securite-marche": {
+   "frames": 12,
+   "cell": 256,
+   "top": 0.039,
+   "feet": 0.957,
+   "headX": 0.56
+  }
+ }
+}

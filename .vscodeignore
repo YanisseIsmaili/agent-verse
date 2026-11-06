@@ -1,0 +1,14 @@
+.vscode/**
+src/**
+equipe-dev/**
+equipe-dev-workspace/**
+attack.out.txt
+references/**
+scripts/**
+node_modules/**
+tsconfig.json
+*.vsix
+.gitignore
+media/sources/**
+media/sprites/contact*.png
+docs/**

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- Aperçu du bureau hors VS Code. Génère d'abord l'instantané :
+       npm run compile && node out/cli.js "C:\chemin\du\projet" --preview
+     puis ouvre ce fichier dans un navigateur. -->
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Agent-Verse (aperçu)</title>
+<link rel="stylesheet" href="../media/office.css">
+<script>
+  window.acquireVsCodeApi = function () {
+    return {
+      postMessage(m) {
+        if (m.type === 'ready') {
+          setTimeout(() => window.postMessage({ type: 'snapshot', snapshot: Object.assign({}, window.__PREVIEW_SNAPSHOT, { style: new URLSearchParams(location.search).get('style') || 'images', map: new URLSearchParams(location.search).get('map') || 'immeuble' }) }, '*'), 50);
+        } else {
+          console.log('postMessage', m);
+        }
+      },
+      getState() { return null; },
+      setState() {},
+    };
+  };
+</script>
+<script>
+  // ?demo charge un instantané fictif avec tous les états ; sinon l'instantané réel.
+  document.write('<script src="' + (location.search.includes('demo') ? 'demo-state.js' : 'preview-state.js') + '"><\/script>');
+</script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+  // Mode images : zones du décor + racine des images, puis les scripts du bureau. ?style=dessine pour le SVG.
+  window.AgentVerseMedia = '../media/';
+  Promise.all([
+    fetch('../media/zones.json').then(r => r.json()).then(z => { window.AgentVerseZones = z; }).catch(() => {}),
+    fetch('../media/sprites.json').then(r => r.json()).then(z => { window.AgentVerseSpriteInfo = z; }).catch(() => {}),
+    fetch('../media/map/places.json').then(r => r.json()).then(z => { window.AgentVersePlaces = z; }).catch(() => {}),
+  ]).then(() => {
+    for (const src of ['../media/characters.js', '../media/building.js', '../media/office.js']) { const s = document.createElement('script'); s.src = src; s.async = false; document.body.appendChild(s); }
+  });
+</script>
+</body>
+</html>

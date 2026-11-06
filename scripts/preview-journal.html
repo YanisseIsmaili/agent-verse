@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- Aperçu du journal hors VS Code : preview-journal.html?i=3 affiche le 4e agent de l'instantané. -->
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Agent-Verse journal (aperçu)</title>
+<link rel="stylesheet" href="../media/journal.css">
+<script>
+  window.acquireVsCodeApi = function () {
+    return {
+      postMessage(m) {
+        if (m.type === 'ready') {
+          const i = Number(new URLSearchParams(location.search).get('i') || 0);
+          const agent = window.__PREVIEW_SNAPSHOT.agents[i];
+          setTimeout(() => window.postMessage({ type: 'agent', agent, at: Date.now() }, '*'), 50);
+        } else { console.log('postMessage', m); }
+      },
+      getState() { return null; },
+      setState() {},
+    };
+  };
+</script>
+<script src="preview-state.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script src="../media/journal.js"></script>
+</body>
+</html>

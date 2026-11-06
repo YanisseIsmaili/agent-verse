@@ -1,0 +1,100 @@
+{
+  "name": "agent-verse",
+  "displayName": "Agent-Verse",
+  "description": "Vois tes agents Claude Code bosser en direct : un immeuble de bureaux style comics où chaque agent est un personnage, avec ce qu'il fait, ses fichiers, sa durée et sa consommation.",
+  "version": "0.6.1",
+  "publisher": "yanisseismaili",
+  "icon": "media/icone.png",
+  "repository": { "type": "git", "url": "https://github.com/YanisseIsmaili/agent-verse" },
+  "galleryBanner": { "color": "#1a1033", "theme": "dark" },
+  "keywords": ["claude", "claude code", "agents", "ai", "visualisation"],
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agentVerse.open",
+        "title": "Agent-Verse : ouvrir le bureau des agents",
+        "category": "Agent-Verse"
+      },
+      {
+        "command": "agentVerse.openJournal",
+        "title": "Agent-Verse : ouvrir le journal d'un agent",
+        "category": "Agent-Verse"
+      }
+    ],
+    "configuration": {
+      "title": "Agent-Verse",
+      "properties": {
+        "agentVerse.scope": {
+          "type": "string",
+          "enum": [
+            "workspace",
+            "all"
+          ],
+          "enumDescriptions": [
+            "Seulement les sessions Claude lancées dans le dossier ouvert dans VS Code",
+            "Toutes les sessions Claude de la machine (y compris l'app Claude)"
+          ],
+          "default": "workspace",
+          "description": "Quelles sessions Claude Code surveiller."
+        },
+        "agentVerse.showFinishedMinutes": {
+          "type": "number",
+          "default": 120,
+          "description": "Garder à l'écran les agents terminés depuis moins de N minutes (0 = les cacher dès qu'ils ont fini)."
+        },
+        "agentVerse.style": {
+          "type": "string",
+          "enum": ["images", "dessine"],
+          "default": "images",
+          "description": "Rendu du bureau : « images » = décor peint et personnages en images (media/sprites), « dessine » = plan et personnages dessinés en SVG (de secours si les images ne chargent pas)."
+        },
+        "agentVerse.map": {
+          "type": "string",
+          "enum": ["immeuble", "decor"],
+          "default": "immeuble",
+          "description": "Carte : « immeuble » = immeuble en coupe qui grandit tout seul (une place par agent, nouvelles pièces et étages au besoin), « decor » = le décor fixe d'une seule image."
+        },
+        "agentVerse.sounds": {
+          "type": "boolean",
+          "default": false,
+          "description": "Petits sons quand un agent rend son rapport ou attend une réponse de toi."
+        },
+        "agentVerse.refreshMs": {
+          "type": "number",
+          "default": 1500,
+          "minimum": 500,
+          "description": "Fréquence de rafraîchissement en millisecondes."
+        },
+        "agentVerse.claudeDir": {
+          "type": "string",
+          "default": "",
+          "description": "Dossier de données de Claude Code. Vide = ~/.claude (ou CLAUDE_CONFIG_DIR)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "dump": "node ./out/cli.js",
+    "package": "npx @vscode/vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.100.0",
+    "typescript": "^5.6.0"
+  }
+}
