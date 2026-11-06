@@ -1,9 +1,9 @@
 {
   "name": "agent-verse",
   "displayName": "Agent-Verse",
-  "description": "Vois tes agents Claude Code bosser en direct : un immeuble de bureaux style comics où chaque agent est un personnage, avec ce qu'il fait, ses fichiers, sa durée et sa consommation.",
-  "version": "0.6.1",
-  "publisher": "yanisseismaili",
+  "description": "Vois tes agents Claude Code bosser en direct : un bureau en style comics où chaque agent est un personnage, avec ce qu'il fait, ses fichiers, sa durée et sa consommation.",
+  "version": "0.7.0",
+  "publisher": "ISMAILIYanisse",
   "icon": "media/icone.png",
   "repository": { "type": "git", "url": "https://github.com/YanisseIsmaili/agent-verse" },
   "galleryBanner": { "color": "#1a1033", "theme": "dark" },
@@ -64,7 +64,7 @@
         "agentVerse.map": {
           "type": "string",
           "enum": ["immeuble", "decor"],
-          "default": "immeuble",
+          "default": "decor",
           "description": "Carte : « immeuble » = immeuble en coupe qui grandit tout seul (une place par agent, nouvelles pièces et étages au besoin), « decor » = le décor fixe d'une seule image."
         },
         "agentVerse.sounds": {

@@ -82,7 +82,7 @@ function refresh(force: boolean) {
       ...snap,
       sounds: cfg().get<boolean>('sounds') ?? true,
       style: cfg().get<'images' | 'dessine'>('style') ?? 'images',
-      map: cfg().get<'immeuble' | 'decor'>('map') ?? 'immeuble',
+      map: cfg().get<'immeuble' | 'decor'>('map') ?? 'decor',
       agents: snap.agents.map(a => ({
         ...a,
         journal: [],

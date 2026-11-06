@@ -120,7 +120,7 @@
     showDone: true,
     sounds: false,
     style: 'images',
-    map: 'immeuble',
+    map: 'decor',
     follow: null,
     filters: { exchange: true, file: true, command: true, text: true, read: false },
     expanded: new Set(),
@@ -249,6 +249,7 @@
   const deskSlot = new Map(); // id → [x, y]
   const meetingSeat = new Map(); // id → index de chaise en réunion
   const roomCursor = {};
+  const overflowIds = new Set(); // agents sans bureau libre : debout sur une chaise de la salle de réunion
   function roomOf(role) { const r = ROOM_OF[role] || role; return ROOMS[r] ? r : 'autre'; }
   function deskFor(a) {
     if (deskSlot.has(a.id)) { return deskSlot.get(a.id); }
@@ -258,8 +259,16 @@
     const used = new Set([...deskSlot.values()].map(p => p.join(',')));
     let pos = (r.slots || []).find(p => !used.has(p.join(',')));
     if (!pos) {
-      roomCursor.overflow = (roomCursor.overflow || 0) + 1;
-      pos = [OVERFLOW_X + ((roomCursor.overflow - 1) % 6) * 70 + 30, CORRIDOR_Y];
+      // Salle pleine : débordement sur les chaises libres de la salle de réunion, puis debout le long de ses murs.
+      // Jamais en bas de l'image (accueil).
+      const m = ROOMS.meeting;
+      for (const k of meetingSeat.values()) { used.add(m.seats[k].join(',')); } // chaises prises par un rapport en cours
+      pos = m.seats.concat(m.standing || []).find(p => !used.has(p.join(',')));
+      if (!pos) {
+        roomCursor.overflow = (roomCursor.overflow || 0) + 1;
+        pos = [m.x + 40 + ((roomCursor.overflow - 1) % 7) * Math.max(40, (m.w - 80) / 7), m.y + 60];
+      }
+      overflowIds.add(a.id);
     }
     deskSlot.set(a.id, pos);
     return pos;
@@ -279,14 +288,15 @@
       else if (phase === 'reporting') {
         if (!meetingSeat.has(a.id)) {
           const taken = new Set(meetingSeat.values());
-          let i = ROOMS.meeting.seats.findIndex((_, k) => !taken.has(k));
+          const asDesk = new Set([...deskSlot.values()].map(p => p.join(',')));
+          let i = ROOMS.meeting.seats.findIndex((p, k) => !taken.has(k) && !asDesk.has(p.join(',')));
           if (i < 0) { i = meetingSeat.size % ROOMS.meeting.seats.length; }
           meetingSeat.set(a.id, i);
         }
         pos = ROOMS.meeting.seats[meetingSeat.get(a.id)];
       }
       else { pos = deskFor(a); }
-      out.set(a.id, { phase, pos, sitting: phase === 'work' || phase === 'rest' || phase === 'desk' });
+      out.set(a.id, { phase, pos, sitting: (phase === 'work' || phase === 'rest' || phase === 'desk') && !overflowIds.has(a.id) });
     }
     return out;
   }
@@ -437,7 +447,7 @@
     const key = curSessionId + '|' + (imgMode() ? 'img' : 'svg') + '|' + (mapMode() ? 'bld' : 'flat');
     if (key !== stageKey) {
       stageKey = key;
-      chars.clear(); lastPos.clear(); deskSlot.clear(); meetingSeat.clear(); roomCursor.overflow = 0;
+      chars.clear(); lastPos.clear(); deskSlot.clear(); overflowIds.clear(); meetingSeat.clear(); roomCursor.overflow = 0;
       applyStyle();
       stage.innerHTML = roomsHtml() + (s ? '' : emptyHtml(snap));
       fitStage();
@@ -456,7 +466,7 @@
     if (!s) { return; }
     const wanted = [s.manager, ...s.agents].filter(Boolean).filter(a => state.showDone || a.status !== 'done');
     const ids = new Set(wanted.map(a => a.id));
-    for (const [id, el] of chars) { if (!ids.has(id)) { el.remove(); chars.delete(id); lastPos.delete(id); deskSlot.delete(id); if (mapMode()) { BLD().release(id); } } }
+    for (const [id, el] of chars) { if (!ids.has(id)) { el.remove(); chars.delete(id); lastPos.delete(id); deskSlot.delete(id); overflowIds.delete(id); if (mapMode()) { BLD().release(id); } } }
     for (const a of wanted) {
       if (chars.has(a.id)) { continue; }
       const el = htmlToEl(charHtml(a));

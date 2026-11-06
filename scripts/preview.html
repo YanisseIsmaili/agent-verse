@@ -12,7 +12,7 @@
     return {
       postMessage(m) {
         if (m.type === 'ready') {
-          setTimeout(() => window.postMessage({ type: 'snapshot', snapshot: Object.assign({}, window.__PREVIEW_SNAPSHOT, { style: new URLSearchParams(location.search).get('style') || 'images', map: new URLSearchParams(location.search).get('map') || 'immeuble' }) }, '*'), 50);
+          setTimeout(() => window.postMessage({ type: 'snapshot', snapshot: Object.assign({}, window.__PREVIEW_SNAPSHOT, { style: new URLSearchParams(location.search).get('style') || 'images', map: new URLSearchParams(location.search).get('map') || 'decor' }) }, '*'), 50);
         } else {
           console.log('postMessage', m);
         }

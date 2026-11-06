@@ -1,5 +1,5 @@
 {
-  "_doc": "Plateau en unités de 1200×675 (le décor 1672×941 est mis à l'échelle ×0.7177). Les sièges sont le point au sol sous le personnage assis (centré sur le bureau du décor). corridors : lignes de passage ; verticals : x des couloirs qui descendent entre les salles. Sièges v0.5 : pieds du sprite assis sur la chaise du décor (le bureau du sprite recouvre celui du décor).",
+  "_doc": "Plateau en unités de 1200×675 (le décor 1672×941 est mis à l'échelle ×0.7177). Les sièges sont le point au sol sous le personnage assis (centré sur le bureau du décor). corridors : lignes de passage ; verticals : x des couloirs qui descendent entre les salles. Sièges v0.5 : pieds du sprite assis sur la chaise du décor (le bureau du sprite recouvre celui du décor). v0.7 : les sièges sont un par bureau dessiné ; une salle pleine déborde sur les chaises de la réunion (seats) puis sur standing (debout le long des murs).",
   "stage": {
     "w": 1200,
     "h": 675
@@ -160,6 +160,24 @@
         [
           676,
           346
+        ]
+      ],
+      "standing": [
+        [
+          432,
+          318
+        ],
+        [
+          762,
+          318
+        ],
+        [
+          420,
+          418
+        ],
+        [
+          774,
+          418
         ]
       ]
     },

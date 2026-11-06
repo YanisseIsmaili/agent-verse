@@ -45,7 +45,7 @@
     return `<path d="M46 44 Q58 18 70 40 Q60 52 46 44Z M94 44 Q82 18 70 40 Q80 52 94 44Z" fill="#fff" stroke="${outline}" stroke-width="${w || 3}" stroke-linejoin="round"/>`;
   }
 
-  function spiderEmblem(color, scale, cx, cy) {
+  function chestEmblem(color, scale, cx, cy) {
     return ''; // pas d'emblème : personnages 100 % originaux
     return `<g transform="translate(${cx} ${cy}) scale(${scale})" fill="${color}" stroke="${color}" stroke-width="2" stroke-linecap="round">
       <ellipse cx="0" cy="2" rx="4.5" ry="7"/><circle cx="0" cy="-7" r="3"/>
@@ -112,13 +112,13 @@
       case 'manager':
         return `${base(p.suit)}
           <path d="M42 90 Q70 84 98 90 L98 100 Q70 94 42 100Z" fill="${p.accent}" opacity=".9"/>
-          ${spiderEmblem(p.accent, 1.1, 70, 80)}
+          ${chestEmblem(p.accent, 1.1, 70, 80)}
           ${shade}`;
       case 'dev':
         return `${base(p.suit)}
           <path d="M42 84 Q48 80 52 86 V114 H42Z M98 84 Q92 80 88 86 V114 H98Z" fill="${p.accent}" stroke="#000" stroke-width="2"/>
           <path d="M70 62 V114 M46 70 Q70 80 94 70 M44 92 Q70 100 96 92" stroke="#111" stroke-width="1.1" opacity=".55" fill="none"/>
-          ${spiderEmblem('#111', .8, 70, 82)}
+          ${chestEmblem('#111', .8, 70, 82)}
           ${shade}`;
       case 'securite':
         return `<path d="M38 70 Q42 62 50 62 H90 Q98 62 102 70 L104 114 H36Z" fill="${p.suit}" ${OUT}/>
@@ -152,7 +152,7 @@
         return `${base(p.suit)}
           <path d="M42 96 Q70 90 98 96 V100 Q98 114 84 114 H56 Q42 114 42 100Z" fill="${p.accent}" stroke="#000" stroke-width="2"/>
           <path d="M70 62 V96 M48 72 Q70 80 92 72" stroke="#111" stroke-width="1.1" opacity=".55" fill="none"/>
-          ${spiderEmblem('#111', .7, 70, 80)}
+          ${chestEmblem('#111', .7, 70, 80)}
           ${shade}`;
     }
   }

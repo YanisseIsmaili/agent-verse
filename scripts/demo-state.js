@@ -106,4 +106,11 @@
       { at: now - 14 * min, agentId: M.id, agentName: M.name, role: 'manager', kind: 'prompt', text: 'Ajoute une cagnotte par club : chaque commande crédite 5 % au club choisi.' },
     ],
   };
+  // ?plein : salles pleines, pour voir le débordement en salle de réunion.
+  if (location.search.includes('plein')) {
+    const more = [['a8', 'dev', 'Refonte du panier'], ['a9', 'dev', 'API des clubs'], ['a10', 'dev', 'Tests unitaires cagnotte'], ['a11', 'git', 'Préparer la PR cagnotte'], ['a12', 'autre', 'Relire les traductions'], ['a13', 'securite', 'Scanner les dépendances'], ['a14', 'bugs', 'Tester le paiement mobile'], ['a15', 'bugs', 'Tester le paiement web']];
+    for (const [k, role, name] of more) {
+      window.__PREVIEW_SNAPSHOT.agents.push(agent({ id: 'demo-session/' + k, role, name, status: 'running', activity: 'reading', startedAt: now - 5 * min, lastActivityAt: now - 2000, toolCount: 5, toolCounts: { Read: 5 }, agentType: role === 'autre' ? 'Explore' : undefined }));
+    }
+  }
 })();

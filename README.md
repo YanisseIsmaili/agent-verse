@@ -17,7 +17,7 @@ Tout se passe sur ta machine : l'extension lit les fichiers que Claude Code écr
 - **Les sons** (désactivés par défaut) : un petit « ding » quand un rapport est rendu, trois notes quand un agent attend une réponse de toi. La cloche en haut à droite les active ou les coupe (réglage `agentVerse.sounds`).
 - **Plusieurs sessions** : un onglet par session Claude sous la barre du haut ; l'entreprise affiche la session choisie (par défaut la plus active).
 
-## L'immeuble modulaire (v0.6, par défaut)
+## L'immeuble modulaire (v0.6, en option)
 
 Le bureau est un **immeuble en coupe** (façon maison de poupée) qui **grandit tout seul** : chaque agent a sa propre place et la garde jusqu'à sa disparition.
 
@@ -27,12 +27,13 @@ Le bureau est un **immeuble en coupe** (façon maison de poupée) qui **grandit 
 - **Caméra** : zoom à la molette, déplacement en cliquant-glissant, bouton ⤢ « tout voir », liste « Suivre… » pour centrer la caméra sur un agent. Pas de mini-carte pour l'instant.
 - **Images** : dépose les PNG de la carte dans `C:\Users\ntjum\Downloads\agen vers\map\` (`piece-dev`, `piece-manager`, `piece-securite`, `piece-test`, `piece-redaction`, `piece-git`, `piece-reunion`, `piece-hall`, `piece-openspace`, `ascenseur`, `toit`, `ciel`, `rue`, `bureau-libre`, voir `PROMPTS-MAP.md`), puis `python scripts/preparer-images.py` les copie dans `media/map/`. Tant qu'une image manque, la pièce est un rectangle de la couleur du service avec son nom ; dès qu'elle existe, elle est utilisée.
 - **Assets provisoires** (v0.6.1) : `python scripts/decouper-assets.py` découpe la planche `media/sources/map/planche-assets.png` (9 pièces d'environ 350 px, toit, porte d'ascenseur, ciel, rue, et la grille de visages dans `media/visages/`) vers `media/map/`. Ces pièces ont des bureaux dessinés : `media/map/places.json` donne une place par bureau dessiné (fractions de l'image), le personnage assis se pose dessus, et la capacité d'une pièce est son nombre de bureaux (open space dev 3, manager 1, sécurité 2, test 2, rédaction 1, Git 1, débordement 2, réunion 6 chaises). Les visages servent de vignettes dans le fil et sur les étiquettes pour la sécurité, les bugs, la rédaction et les agents génériques. Les vraies images 1536 × 768 copiées depuis `Downloads\agen vers\map\` remplacent ces découpes (adapte alors `places.json`, ou supprime-le pour revenir aux 4 places par pièce).
-- Réglage `agentVerse.map` : `immeuble` (défaut) ou `decor` pour l'ancien décor fixe ci-dessous.
+- Réglage `agentVerse.map` : `decor` (défaut, le grand décor d'une seule image ci-dessous) ou `immeuble`.
 
-## Le décor et les personnages en images (v0.4)
+## Le décor et les personnages en images (v0.4, par défaut)
 
 Par défaut, le bureau est un **décor peint** (`media/decor-nuit.jpg`, vue de haut la nuit, sept zones) et les agents sont des **images** découpées d'une planche (`media/sprites/<rôle>-<pose>.png`, trois poses : assis au bureau, debout, marche ; le miroir horizontal sert pour marcher vers la gauche). Les cartouches de titres et le texte restent en HTML/CSS par-dessus ; les bulles des personnages utilisent la bulle de pensée découpée (`icones/pensee.png`, traîne vers la tête, en miroir près du bord droit) ; le document sur la table, l'enveloppe des missions et les éclats CALL!/DONE! utilisent les icônes découpées (`media/icones/`). Les personnages assis se posent sur le bureau du décor (leur propre bureau le recouvre).
 
+- **Une place par bureau dessiné** (v0.7) : les sièges de `zones.json` sont relevés sur l'image, un par bureau réellement dessiné (open space dev 3, labo sécurité 2, salle de test 2, rédaction 1, bureau du manager 1, réunion 6 chaises) ; deux agents ne partagent jamais un bureau. Git va en salle de test. Quand la salle d'un rôle est pleine, l'agent **déborde sur une chaise libre de la salle de réunion** (debout), puis le long de ses murs ; jamais devant l'accueil en bas de l'image. Les chaises occupées ainsi ne servent pas aux rapports.
 - `media/zones.json` décrit les zones (rectangles), les sièges (un point au sol par bureau), le bureau du manager et ses places de visiteurs, la table de réunion et ses places, l'entrée et les couloirs : un couloir sous les bureaux du haut, le sol libre en bas, et deux passages verticaux entre les salles. Les trajets passent par ces couloirs (entrée → manager → salle du rôle → réunion → retour), sans pathfinding.
 - Les **sièges** de `zones.json` sont calés sur les chaises du décor (les pieds du sprite assis sur la chaise, son bureau recouvrant celui du décor). Les agents **sans rôle reconnu** prennent un poste libre de l'open space et leur étiquette affiche le type de sous-agent demandé par Claude (`Explore`, `Plan`, `general-purpose`…).
 - **Animations** : dépose des bandes PNG (une ligne de cases carrées de 256×256, fond transparent) dans `C:\Users\ntjum\Downloads\agen vers\animations\` : `<rôle>-marche.png` (12 cases), `<rôle>-clavier.png` (8), en option `<rôle>-attente.png` (6) ; les GIF vont dans `media/sources/anim/<rôle>-<anim>.gif`. Puis `python scripts/preparer-images.py` : il convertit les GIF en bandes, copie les bandes, et mesure tout (taille, tête, pieds) dans `media/sprites.json`. Le bureau joue la bande (CSS `steps`, 100 ms par case) à la place de l'image fixe, et retombe sur l'image fixe si la bande manque. La marche du manager est déjà branchée.
@@ -75,7 +76,7 @@ Puis ouvre le dossier `agent-verse` dans VS Code et appuie sur **F5**. Une deuxi
 npm run package
 ```
 
-Ça crée un fichier `agent-verse-0.6.1.vsix`. Dans VS Code : `Ctrl+Maj+P` → **Extensions : Install from VSIX…** → choisis ce fichier. L'extension reste installée, même après redémarrage.
+Ça crée un fichier `agent-verse-0.7.0.vsix`. Dans VS Code : `Ctrl+Maj+P` → **Extensions : Install from VSIX…** → choisis ce fichier. L'extension reste installée, même après redémarrage.
 
 **Pour mettre à jour** une version déjà installée : refais `npm run compile` puis `npm run package`, installe le nouveau `.vsix` de la même façon (il remplace l'ancien), puis **Developer: Reload Window** (`Ctrl+Maj+P`) ou redémarre VS Code.
 
@@ -100,7 +101,7 @@ Dans les paramètres VS Code (`Ctrl+,`, cherche « Agent-Verse ») :
 |---|---|---|
 | `agentVerse.scope` | `workspace` | `workspace` = le dossier ouvert, `all` = toute la machine |
 | `agentVerse.showFinishedMinutes` | `120` | Combien de minutes garder les agents terminés à l'écran |
-| `agentVerse.map` | `immeuble` | `immeuble` = immeuble modulaire, `decor` = décor fixe d'une image |
+| `agentVerse.map` | `decor` | `decor` = décor fixe d'une image, `immeuble` = immeuble modulaire |
 | `agentVerse.style` | `images` | `images` = décor peint et sprites, `dessine` = rendu SVG de secours |
 | `agentVerse.sounds` | `false` | Petits sons (rapport rendu, agent qui attend) |
 | `agentVerse.refreshMs` | `1500` | Fréquence de rafraîchissement (en millisecondes) |
