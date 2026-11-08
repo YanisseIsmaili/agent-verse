@@ -195,7 +195,8 @@ def main():
     if os.path.isdir(mapdir):
         os.makedirs(os.path.join(ROOT, 'media', 'map'), exist_ok=True)
         for f in sorted(os.listdir(mapdir)):
-            if f.lower().endswith('.png'):
+            # Seulement les noms attendus par building.js : les autres images (planches, essais) restent dans Downloads.
+            if f.lower().endswith('.png') and (f.lower().startswith('piece-') or f.lower()[:-4] in ('toit', 'ascenseur', 'ciel', 'rue', 'bureau-libre')):
                 shutil.copyfile(os.path.join(mapdir, f), os.path.join(ROOT, 'media', 'map', f.lower()))
                 print('carte copiee :', f)
     out = {'sprites': {}, 'anims': {}}
