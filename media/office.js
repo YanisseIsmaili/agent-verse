@@ -12,6 +12,7 @@
     bugs:     { label: 'Chasseur de bugs', color: '#22c55e', dark: '#0b4a24', emblem: 'bug' },
     readme:   { label: 'Rédacteur README', color: '#ffb000', dark: '#6b4a00', emblem: 'doc' },
     git:      { label: 'Git',              color: '#166534', dark: '#052e16', emblem: 'git' },
+    '3d':     { label: '3D Maker',         color: '#14b8a6', dark: '#0f4c45', emblem: 'cube' },
     autre:    { label: 'Agent',            color: '#8d99ae', dark: '#3a4150', emblem: 'dot' },
   };
   const ACT = {
@@ -44,12 +45,13 @@
   const ANIM_KEYS = ['marche', 'clavier', 'attente'];
   const SPRITE_INFO = window.AgentVerseSpriteInfo || { sprites: {}, anims: {} };
   // Rôles sans images propres : Git emprunte le personnage générique (teinté en vert par le CSS).
-  const SPRITE_OF = { git: 'autre' };
+  const SPRITE_OF = {}; // rôles qui empruntent les images d'un autre (aucun : Git et 3D ont les leurs)
   const PLACES = window.AgentVersePlaces || null;
   // Visages découpés (media/visages/<role>-1.png) pour le fil et les étiquettes ; les autres rôles gardent leur vignette.
   const FACE_ROLES = new Set(['securite', 'bugs', 'readme', 'autre']);
   const faceUrl = role => (imgMode() && FACE_ROLES.has(role) ? `${MEDIA}visages/${role}-1.png` : null);
-  const ROOM_OF = { git: 'bugs', autre: 'dev' };
+  const ROOM_OF = { git: 'bugs', '3d': 'dev', autre: 'dev' };
+  const ALT_ROOM = { '3d': 'readme' }; // salle de repli quand celle du rôle est pleine
   const spriteBase = role => SPRITE_OF[role] || (ROLE[role] ? role : 'autre');
   const ROOMS_SVG = {
     dev:      { x: 24,  y: 24,  w: 372, h: 312, label: 'Open space dev',    bg: '#dbeafe', accent: '#3b82f6', slots: grid(24, 24, 3, 2, 372) },
@@ -258,6 +260,7 @@
     const r = ROOMS[room];
     const used = new Set([...deskSlot.values()].map(p => p.join(',')));
     let pos = (r.slots || []).find(p => !used.has(p.join(',')));
+    if (!pos && ALT_ROOM[a.role] && ROOMS[ALT_ROOM[a.role]]) { pos = (ROOMS[ALT_ROOM[a.role]].slots || []).find(p => !used.has(p.join(','))); }
     if (!pos) {
       // Salle pleine : débordement sur les chaises libres de la salle de réunion, puis debout le long de ses murs.
       // Jamais en bas de l'image (accueil).
@@ -508,6 +511,11 @@
       el.className = `char ${a.kind} role-${a.role} act-${a.activity} ph-${l.phase} ${l.sitting && !walking ? 'sitting' : 'standing'} ${walking ? 'walking' : ''} ${flip ? 'flip' : ''} ${quiet ? 'quiet' : ''} ${hasAnims} ${state.selected === a.id ? 'selected' : ''}`;
       el.style.zIndex = String(10 + Math.round(l.pos[1] / 10));
       let tagText = l.phase === 'briefing' ? 'GO!' : l.phase === 'reporting' ? 'RAPPORT' : (ACT[a.activity] || ACT.thinking).tag;
+      if (a.role === '3d' && a.status !== 'done' && /blender|rend(u|er)|\.blend\b/i.test(a.currentTool ? a.currentTool.label : '')) {
+        tagText = 'RENDER!';
+        const k = a.id + ':render:' + a.currentTool.startedAt;
+        if (!seenFx.has(k)) { seenFx.add(k); if (!firstSnapshot) { burst('RENDER!', l.pos, 'call'); } }
+      }
       if (a.role === 'git' && a.status !== 'done') {
         const toolLbl = a.currentTool ? a.currentTool.label : '';
         if (/git push/i.test(toolLbl)) {

@@ -18,6 +18,8 @@
   const A4 = { id: 'demo-session/a4', name: 'Documenter la cagnotte', role: 'readme' };
   const A5 = { id: 'demo-session/a5', name: 'Audit infos codées en dur', role: 'securite' };
   const A7 = { id: 'demo-session/a7', name: 'Vérifier les mails de relance', role: 'autre' };
+  const A8 = { id: 'demo-session/a8', name: 'Préparer la PR cagnotte', role: 'git' };
+  const A9 = { id: 'demo-session/a9', name: 'Modéliser la tirelire 3D', role: '3d' };
   const brief = (a, at, extra) => x(a.id + ':brief', 'brief', M, a, at, a.name, `# Agent ${a.role}\n\nTu es ${a.role} de l'équipe…\n\n---\n## Ta tâche\n${extra}\n\n## Contexte du projet\n- Dossier : C:\\Users\\moi\\projects\\boutique\n- Langage : Python (FastAPI) + React`);
 
   window.__PREVIEW_SNAPSHOT = {
@@ -71,6 +73,16 @@
         currentTool: { id: 't7', name: 'Bash', label: 'lance : Lister les paniers abandonnés', detail: 'python relances.py --dry-run', activity: 'running', startedAt: now - 1000 },
       }),
       agent({
+        id: A8.id, role: 'git', name: A8.name, status: 'running', activity: 'running',
+        startedAt: now - 4 * min, lastActivityAt: now - 900, toolCount: 7, toolCounts: { Bash: 7 },
+        currentTool: { id: 't8', name: 'Bash', label: 'lance : git push -u origin cagnotte', detail: 'git push -u origin feat/cagnotte', activity: 'running', startedAt: now - 900 },
+      }),
+      agent({
+        id: A9.id, role: '3d', name: A9.name, status: 'running', activity: 'writing',
+        startedAt: now - 6 * min, lastActivityAt: now - 1200, toolCount: 9, toolCounts: { Write: 4, Bash: 5 },
+        currentTool: { id: 't9', name: 'Bash', label: 'lance : blender --background tirelire.blend --render', detail: 'blender -b tirelire.blend -o //rendu/ -f 1', activity: 'running', startedAt: now - 1200 },
+      }),
+      agent({
         id: 'demo-session/a6', role: 'autre', name: 'Comparer le catalogue', status: 'stale', activity: 'stale',
         startedAt: now - 300 * min, lastActivityAt: now - 200 * min, toolCount: 12,
       }),
@@ -108,7 +120,7 @@
   };
   // ?plein : salles pleines, pour voir le débordement en salle de réunion.
   if (location.search.includes('plein')) {
-    const more = [['a8', 'dev', 'Refonte du panier'], ['a9', 'dev', 'API des clubs'], ['a10', 'dev', 'Tests unitaires cagnotte'], ['a11', 'git', 'Préparer la PR cagnotte'], ['a12', 'autre', 'Relire les traductions'], ['a13', 'securite', 'Scanner les dépendances'], ['a14', 'bugs', 'Tester le paiement mobile'], ['a15', 'bugs', 'Tester le paiement web']];
+    const more = [['a8', 'dev', 'Refonte du panier'], ['a9', 'dev', 'API des clubs'], ['a10', 'dev', 'Tests unitaires cagnotte'], ['a12', 'autre', 'Relire les traductions'], ['a13', 'securite', 'Scanner les dépendances'], ['a14', 'bugs', 'Tester le paiement mobile'], ['a15', 'bugs', 'Tester le paiement web']];
     for (const [k, role, name] of more) {
       window.__PREVIEW_SNAPSHOT.agents.push(agent({ id: 'demo-session/' + k, role, name, status: 'running', activity: 'reading', startedAt: now - 5 * min, lastActivityAt: now - 2000, toolCount: 5, toolCounts: { Read: 5 }, agentType: role === 'autre' ? 'Explore' : undefined }));
     }

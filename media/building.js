@@ -25,7 +25,7 @@
     git:       { label: 'Git',           img: 'piece-git',       bg: '#dcfce7', accent: '#166534', slots: 4 },
     openspace: { label: 'Open space',    img: 'piece-openspace', bg: '#e0f2fe', accent: '#0ea5e9', slots: 4 },
   };
-  const SERVICE_OF_ROLE = { manager: 'manager', dev: 'dev', securite: 'securite', bugs: 'bugs', readme: 'readme', git: 'git', autre: 'openspace' };
+  const SERVICE_OF_ROLE = { manager: 'manager', dev: 'dev', securite: 'securite', bugs: 'bugs', readme: 'readme', git: 'git', '3d': 'dev', autre: 'openspace' };
   const IMAGES = ['piece-manager', 'piece-reunion', 'piece-hall', 'piece-dev', 'piece-securite', 'piece-test', 'piece-redaction', 'piece-git', 'piece-openspace', 'ascenseur', 'toit', 'ciel', 'rue', 'bureau-libre'];
   const SEAT_X = [70, 157, 244, 331];
 

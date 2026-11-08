@@ -1,5 +1,20 @@
 {
  "sprites": {
+  "3d-assis": {
+   "w": 296,
+   "h": 313,
+   "headX": 0.385
+  },
+  "3d-debout": {
+   "w": 88,
+   "h": 300,
+   "headX": 0.5
+  },
+  "3d-marche": {
+   "w": 200,
+   "h": 302,
+   "headX": 0.438
+  },
   "autre-assis": {
    "w": 148,
    "h": 132,
@@ -44,6 +59,21 @@
    "w": 113,
    "h": 156,
    "headX": 0.553
+  },
+  "git-assis": {
+   "w": 260,
+   "h": 298,
+   "headX": 0.6
+  },
+  "git-debout": {
+   "w": 125,
+   "h": 300,
+   "headX": 0.52
+  },
+  "git-marche": {
+   "w": 187,
+   "h": 297,
+   "headX": 0.519
   },
   "manager-assis": {
    "w": 275,
@@ -92,6 +122,20 @@
   }
  },
  "anims": {
+  "3d-clavier": {
+   "frames": 8,
+   "cell": 256,
+   "top": 0.039,
+   "feet": 0.957,
+   "headX": 0.38
+  },
+  "3d-marche": {
+   "frames": 8,
+   "cell": 256,
+   "top": 0.039,
+   "feet": 0.957,
+   "headX": 0.466
+  },
   "autre-marche": {
    "frames": 12,
    "cell": 256,
@@ -112,6 +156,13 @@
    "top": 0.039,
    "feet": 0.957,
    "headX": 0.541
+  },
+  "git-marche": {
+   "frames": 8,
+   "cell": 256,
+   "top": 0.039,
+   "feet": 0.957,
+   "headX": 0.491
   },
   "manager-marche": {
    "frames": 12,

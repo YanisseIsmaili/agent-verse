@@ -1,6 +1,6 @@
 // Types partagés entre la détection (côté extension) et l'affichage (webviews).
 
-export type RoleKey = 'manager' | 'dev' | 'securite' | 'bugs' | 'readme' | 'git' | 'autre';
+export type RoleKey = 'manager' | 'dev' | 'securite' | 'bugs' | 'readme' | 'git' | '3d' | 'autre';
 
 export type Activity =
   | 'reading'     // lit un fichier, cherche

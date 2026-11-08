@@ -2,7 +2,7 @@
   "name": "agent-verse",
   "displayName": "Agent-Verse",
   "description": "Vois tes agents Claude Code bosser en direct : un bureau en style comics où chaque agent est un personnage, avec ce qu'il fait, ses fichiers, sa durée et sa consommation.",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "publisher": "ISMAILIYanisse",
   "icon": "media/icone.png",
   "repository": { "type": "git", "url": "https://github.com/YanisseIsmaili/agent-verse" },

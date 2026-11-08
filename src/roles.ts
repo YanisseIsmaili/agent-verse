@@ -11,6 +11,7 @@ const PATTERNS: Array<{ role: RoleKey; re: RegExp }> = [
   { role: 'bugs',     re: /^\s*#\s*agent\s+chasseur\s+de\s+bugs?/i },
   { role: 'readme',   re: /^\s*#\s*agent\s+r[ée]dacteur\s+readme/i },
   { role: 'git',      re: /^\s*#\s*agent\s+git\b/i },
+  { role: '3d',       re: /^\s*#\s*agent\s+3d\s*maker/i },
 ];
 
 export function detectRole(prompt: string, description = ''): RoleKey {
@@ -23,6 +24,7 @@ export function detectRole(prompt: string, description = ''): RoleKey {
   if (/s[ée]cu|audit|faille|vuln/.test(low)) { return 'securite'; }
   if (/bug|casser|planter/.test(low)) { return 'bugs'; }
   if (/readme|documente|documentation/.test(low)) { return 'readme'; }
+  if (/blender|3d\b|mod[èe]le 3d|rendu/.test(low)) { return '3d'; }
   if (/d[ée]velopp|impl[ée]mente|coder?\b|ajouter|cr[ée]er/.test(low)) { return 'dev'; }
   return 'autre';
 }
@@ -48,5 +50,6 @@ export const ROLE_LABELS: Record<RoleKey, string> = {
   bugs: 'Chasseur de bugs',
   readme: 'Rédacteur README',
   git: 'Git',
+  '3d': '3D Maker',
   autre: 'Agent',
 };

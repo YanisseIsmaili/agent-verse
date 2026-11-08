@@ -488,7 +488,6 @@ a.link { text-decoration: underline; }
 .stage.img .char.standing.has-attente.act-waiting .anim-attente { display: block; }
 .stage.img .act-done .anim { filter: grayscale(.7) opacity(.7); }
 /* Git : le personnage générique teinté vert foncé / orange, onomatopées PUSH! et CI OK!. */
-.stage.img .role-git .sprite img, .stage.img .role-git .anim { filter: hue-rotate(95deg) saturate(.8) brightness(.85) drop-shadow(0 6px 4px rgba(0, 0, 0, .5)); }
 .role-git .sprite svg { filter: hue-rotate(95deg) saturate(.8) drop-shadow(-1.4px 0 rgba(0, 229, 255, .75)) drop-shadow(1.4px 0 rgba(255, 45, 117, .75)); }
 .role-git .tag { background: #166534; color: #ffb347; }
 .role-git .plate .role { color: #ffb347; }
@@ -595,3 +594,9 @@ a.link { text-decoration: underline; }
 .plate.has-face { padding-left: 14px; }
 .plate .face { position: absolute; left: -8px; top: -8px; width: 26px; height: 26px; border-radius: 50%; border: 2px solid #000; object-fit: cover; background: #fff; }
 .avatar.face { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #000; object-fit: cover; }
+
+/* ---------- v0.8.0 : personnages Git et 3D Maker ---------- */
+.role-3d .tag { background: #0f766e; color: #fb923c; }
+.role-3d .plate .role { color: #2dd4bf; }
+.role-3d .sprite svg { filter: hue-rotate(160deg) saturate(.9) drop-shadow(-1.4px 0 rgba(0, 229, 255, .75)) drop-shadow(1.4px 0 rgba(255, 45, 117, .75)); }
+.rdot.role-3d, .fg-head .rdot.r-3d { background: #14b8a6; }
